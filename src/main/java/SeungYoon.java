@@ -2,12 +2,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class SeungYoon {
-    private static void printTaskList(String[] taskList) {
+    private static void printTaskList(Task[] taskList) {
         System.out.println("\t____________________________________________________________");
 
         for (int i = 0; i < taskList.length; i += 1) {
             if (taskList[i] != null) {
-                System.out.println("\t" + (i + 1) + ". " + taskList[i]);
+                System.out.println("\t" + taskList[i].toString());
             } else {
                 break;
             }
@@ -15,20 +15,44 @@ public class SeungYoon {
         System.out.println("\t____________________________________________________________\n");
     }
 
-    private static  String[] addTask(String[] taskList, String task) {
-        String[] newTaskList = new String[100];
+    private static Task[] addTask(Task[] taskList, String task) {
+        Task[] newTaskList = new Task[100];
         int i = 0;
         while (i < taskList.length) {
             if (taskList[i] != null) {
-                int index = i + 1;
                 newTaskList[i] = taskList[i];
             } else {
                 break;
             }
             i += 1;
         }
-        newTaskList[i] = task;
+        newTaskList[i] = new Task(task, i + 1);
+        System.out.println(
+            "\t____________________________________________________________\n" +
+            "\tadded: " + task + "\n" +
+            "\t____________________________________________________________\n"
+        );
         return newTaskList;
+    }
+
+    private static void flipCompletionStatus(Task[] taskList, int taskIndex, boolean completionStatus) {
+        if (completionStatus) {
+            taskList[taskIndex].setComplete();
+            System.out.println(
+                "\t_________________________________________________________\n" +
+                "\tGood work brudda, the deed has been done, make sure to hydrate ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧\n" +
+                "\t\t" + taskList[taskIndex].toString() + "\n" +
+                "\t_________________________________________________________\n"
+            );
+        } else {
+            taskList[taskIndex].setIncomplete();
+            System.out.println(
+                "\t_________________________________________________________\n" +
+                    "\tGet back to work, you bum ⁽⁽(੭ꐦ •̀Д•́ )੭*⁾⁾\n" +
+                    "\t\t" + taskList[taskIndex].toString() + "\n" +
+                    "\t_________________________________________________________\n"
+            );
+        }
     }
 
     public static void main(String[] args) {
@@ -41,7 +65,8 @@ public class SeungYoon {
 
         Scanner sc = new Scanner(System.in);
         String nextLine = sc.nextLine();
-        String[] taskList = new String[100];
+        //String[] taskList = new String[100];
+        Task[] taskList = new Task[100];
         while (!nextLine.equals("bye")) {
             /*
             System.out.println(
@@ -50,13 +75,14 @@ public class SeungYoon {
                 "\t____________________________________________________________\n"); */
             if (nextLine.equals("list")) {
                 printTaskList(taskList);
+            } else if (nextLine.startsWith("mark", 0)) {
+                if (nextLine.length() > 4)
+                    flipCompletionStatus(taskList, Integer.parseInt(nextLine.substring(5)) - 1, true);
+            } else if (nextLine.startsWith("unmark", 0)) {
+                if (nextLine.length() > 6)
+                    flipCompletionStatus(taskList, Integer.parseInt(nextLine.substring(7)) - 1, false);
             } else {
                 taskList = addTask(taskList, nextLine);
-                System.out.println(
-                    "\t____________________________________________________________\n" +
-                    "\tadded: " + nextLine + "\n" +
-                    "\t____________________________________________________________\n"
-                );
             }
             nextLine = sc.nextLine();
         }

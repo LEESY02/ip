@@ -6,11 +6,11 @@ public class SeungYoon {
 
     public static final String NEW_LINE = "____________________________________________________________\n";
     public static final String NEW_LINE_TAB = "\t____________________________________________________________\n";
+    public static final String LINE_TAB = "\t____________________________________________________________";
 
     // "list" command: Print
     private static void printTaskList(Task[] taskList) {
-        System.out.println(NEW_LINE_TAB);
-
+        System.out.print(NEW_LINE_TAB);
         for (int i = 0; i < taskList.length; i += 1) {
             if (taskList[i] != null) {
                 System.out.println("\t" + String.format("%d.", i + 1) + taskList[i].toString());
@@ -18,7 +18,7 @@ public class SeungYoon {
                 break;
             }
         }
-        System.out.println(String.format("\tYou have %d tasks °❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*", numberOfTasks));
+        System.out.println(String.format("\tYou have %d tasks", numberOfTasks));
         System.out.println(NEW_LINE_TAB);
     }
 
@@ -87,17 +87,19 @@ public class SeungYoon {
     private static void flipCompletionStatus(Task[] taskList, int taskIndex, boolean completionStatus) {
         if (completionStatus) {
             taskList[taskIndex].setComplete();
+
             System.out.println(
                 NEW_LINE_TAB +
-                "\tGood work brudda, the deed has been done, make sure to hydrate ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧\n" +
+                "\tGood work brudda, the deed has been done, make sure to hydrate \n" +
                 "\t\t" + taskList[taskIndex].toString() + "\n" +
                 NEW_LINE_TAB
             );
         } else {
             taskList[taskIndex].setIncomplete();
+
             System.out.println(
                 NEW_LINE_TAB +
-                "\tGet back to work! ⁽⁽(੭ꐦ •̀Д•́ )੭*⁾⁾\n" +
+                "\tGet back to work!\n" +
                 "\t\t" + taskList[taskIndex].toString() + "\n" +
                 NEW_LINE_TAB
             );
@@ -159,7 +161,7 @@ public class SeungYoon {
     }
     private static void printOutroMessage() {
         String message =
-            NEW_LINE_TAB + "\tBye. Hope to see you again soon! (づ ᴗ _ᴗ)づ♡ ඞ\n" + NEW_LINE_TAB;
-        System.out.println(message);
+            NEW_LINE_TAB + "\tBye. Hope to see you again soon!\n" + LINE_TAB;
+        System.out.print(message);
     }
 }

@@ -25,14 +25,18 @@ public class Task {
         return task;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     @Override
     public String toString() {
         String isCompletedCheckMark;
         if (this.getCompletionStatus()) {
-            isCompletedCheckMark = ".[X] ";
+            isCompletedCheckMark = "[X] ";
         } else {
-            isCompletedCheckMark = ".[ ] ";
+            isCompletedCheckMark = "[ ] ";
         }
-        return index + isCompletedCheckMark + task;
+        return isCompletedCheckMark + task;
     }
 }

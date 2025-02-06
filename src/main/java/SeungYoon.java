@@ -1,6 +1,14 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+/*
+ * Coding standard is defined by IDE
+ * lowerCamelCase for variables and object instances
+ * UpperCamelCase for Class names
+ * ALL_CAPS_WITH_UNDERSCORE for constants
+ * Print messages encapsulated in private static methods for readability
+ */
+
 public class SeungYoon {
     private static int numberOfTasks = 0;
 
@@ -21,6 +29,7 @@ public class SeungYoon {
         System.out.println(String.format("\tYou have %d tasks", numberOfTasks));
         System.out.println(NEW_LINE_TAB);
     }
+    // end of list
 
     // Add algorithm
     private static Task[] addTask(Task[] taskList, String input) {
@@ -81,30 +90,36 @@ public class SeungYoon {
             NEW_LINE_TAB + "\tadded: " + task.toString() + "\n" + NEW_LINE_TAB
         );
     }
-    // end of add algorithm
+    // end of add
 
     // "mark" / "unmark" command: Mark as done or undone
     private static void flipCompletionStatus(Task[] taskList, int taskIndex, boolean completionStatus) {
         if (completionStatus) {
             taskList[taskIndex].setComplete();
-
-            System.out.println(
-                NEW_LINE_TAB +
-                "\tGood work brudda, the deed has been done, make sure to hydrate \n" +
-                "\t\t" + taskList[taskIndex].toString() + "\n" +
-                NEW_LINE_TAB
-            );
+            printMarkedMessage(taskList, taskIndex);
         } else {
             taskList[taskIndex].setIncomplete();
-
-            System.out.println(
-                NEW_LINE_TAB +
-                "\tGet back to work!\n" +
-                "\t\t" + taskList[taskIndex].toString() + "\n" +
-                NEW_LINE_TAB
-            );
+            printUnmarkedMessage(taskList, taskIndex);
         }
     }
+
+    private static void printMarkedMessage(Task[] taskList, int taskIndex) {
+        System.out.println(
+            NEW_LINE_TAB +
+            "\tGood work brudda, the deed has been done, make sure to hydrate \n" +
+            "\t\t" + taskList[taskIndex].toString() + "\n" +
+            NEW_LINE_TAB
+        );
+    }
+    private static void printUnmarkedMessage(Task[] taskList, int taskIndex) {
+        System.out.println(
+            NEW_LINE_TAB +
+            "\tGet back to work!\n" +
+            "\t\t" + taskList[taskIndex].toString() + "\n" +
+            NEW_LINE_TAB
+        );
+    }
+    // End of mark / unmark
 
     // Execute commands based on the 1st word of the input
     private static Task[] executeCommand(Task[] taskList, String input) {

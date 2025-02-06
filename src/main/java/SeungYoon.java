@@ -44,45 +44,55 @@ public class SeungYoon {
     private static Task returnCorrectTask(String input, int index) {
         Scanner sc = new Scanner(input);
         String taskType = sc.next();
-        String task = "";
-        String currentWord = "";
 
         switch (taskType) {
         case "todo":
-            task = sc.nextLine();
-            sc.close();
-            return new ToDo(task.strip(), index);
+            return returnToDo(sc, index);
         case "deadline":
-            task = "";
-            currentWord = "";
-            while (!currentWord.equals("/by")) {
-                task += " " + currentWord;
-                currentWord = sc.next();
-            }
-            String deadline = sc.nextLine();
-            sc.close();
-            return new Deadline(task.strip(), index, deadline.strip());
+            return returnDeadline(sc, index);
         case "event":
-            task = "";
-            currentWord = "";
-            while (!currentWord.equals("/from")) {
-                task += " " + currentWord;
-                currentWord = sc.next();
-            }
-            String startDate = "";
-            currentWord = "";
-            while (!currentWord.equals("/to")) {
-                startDate += " " + currentWord;
-                currentWord = sc.next();
-            }
-            String endDate = sc.nextLine();
-            sc.close();
-            return new Event(task.strip(), index, startDate.strip(), endDate.strip());
+            return returnEvent(sc, index);
         default:
+            return returnTask(sc, input, index);
         }
+    }
 
+    private static ToDo returnToDo(Scanner sc, int index) {
+        String task = sc.nextLine();
         sc.close();
-        return new Task(input, index);
+        return new ToDo(task.strip(), index);
+    }
+    private static Deadline returnDeadline(Scanner sc, int index) {
+        String task = "";
+        String currentWord = "";
+        while (!currentWord.equals("/by")) {
+            task += " " + currentWord;
+            currentWord = sc.next();
+        }
+        String deadline = sc.nextLine();
+        sc.close();
+        return new Deadline(task.strip(), index, deadline.strip());
+    }
+    private static Event returnEvent(Scanner sc, int index) {
+        String task = "";
+        String currentWord = "";
+        while (!currentWord.equals("/from")) {
+            task += " " + currentWord;
+            currentWord = sc.next();
+        }
+        String startDate = "";
+        currentWord = "";
+        while (!currentWord.equals("/to")) {
+            startDate += " " + currentWord;
+            currentWord = sc.next();
+        }
+        String endDate = sc.nextLine();
+        sc.close();
+        return new Event(task.strip(), index, startDate.strip(), endDate.strip());
+    }
+    private static Task returnTask(Scanner sc, String task, int index) {
+        sc.close();
+        return new Task(task, index);
     }
 
     private static void printAddTaskMessage(Task task) {
@@ -136,16 +146,10 @@ public class SeungYoon {
             printTaskList(taskList);
             break;
         case "mark":
-            if (!task.isBlank()) {
-                int index = Integer.parseInt(task) - 1;
-                flipCompletionStatus(taskList, index, true);
-            }
+            markOrUnmark(taskList, task, true);
             break;
         case "unmark":
-            if (!task.isBlank()) {
-                int index = Integer.parseInt(task) - 1;
-                flipCompletionStatus(taskList, index, false);
-            }
+            markOrUnmark(taskList, task, false);
             break;
         default:
             taskList = addTask(taskList, input);
@@ -153,6 +157,14 @@ public class SeungYoon {
 
         return taskList;
     }
+
+    private static void markOrUnmark(Task[] taskList, String indexString, boolean completionStatus) {
+        if (!indexString.isBlank()) {
+            int index = Integer.parseInt(indexString) - 1;
+            flipCompletionStatus(taskList, index, completionStatus);
+        }
+    }
+    // end of command execution algorithm
 
     public static void main(String[] args) {
         printIntroMessage();

@@ -1,44 +1,51 @@
 ____________________________________________________________
-Hello! I'm Seung Yoon
-What can I do for you?
+Hello! I'm Seung Yoon	What can I do for you?
 ____________________________________________________________
 
 	____________________________________________________________
-	added: [T][ ] borrow book
+	added: 1. [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
 	____________________________________________________________
 
 	____________________________________________________________
-	1.[T][ ] borrow book
-	You have 1 tasks
+	added: 2. [D][ ] weekly CS2113 quiz (by: Monday 9pm)
 	____________________________________________________________
 
 	____________________________________________________________
-	added: [D][ ] return book (by: Sunday)
+	1. [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
+	2. [D][ ] weekly CS2113 quiz (by: Monday 9pm)
+	You have 2 tasks
 	____________________________________________________________
 
 	____________________________________________________________
-	added: [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+	added: 3. [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
 	____________________________________________________________
 
 	____________________________________________________________
-	1.[T][ ] borrow book
-	2.[D][ ] return book (by: Sunday)
-	3.[E][ ] project meeting (from: Mon 2pm, to: 4pm)
+	Good work brudda, the deed has been done, make sure to hydrate
+		1. [T][X] <Seung-Yoon>: Answer CS2113 tutorial questions
+	____________________________________________________________
+
+	____________________________________________________________
+	1. [T][X] <Seung-Yoon>: Answer CS2113 tutorial questions
+	2. [D][ ] weekly CS2113 quiz (by: Monday 9pm)
+	3. [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
 	You have 3 tasks
+	____________________________________________________________
+
+	____________________________________________________________
+	Good work brudda, the deed has been done, make sure to hydrate
+		2. [D][X] weekly CS2113 quiz (by: Monday 9pm)
 	____________________________________________________________
 
 	____________________________________________________________
 	Get back to work!
-		[T][ ] borrow book
+		1. [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
 	____________________________________________________________
 
 	____________________________________________________________
-	1.[T][ ] borrow book
-	2.[D][ ] return book (by: Sunday)
-	3.[E][ ] project meeting (from: Mon 2pm, to: 4pm)
+	1. [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
+	2. [D][X] weekly CS2113 quiz (by: Monday 9pm)
+	3. [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
 	You have 3 tasks
 	____________________________________________________________
 
-	____________________________________________________________
-	Bye. Hope to see you again soon!
-	____________________________________________________________

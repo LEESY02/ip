@@ -1,3 +1,7 @@
+package task.tasktypes;
+
+import task.Task;
+
 public class ToDo extends Task {
     // Constants
     private static final String TASK_TYPE = " [T]";

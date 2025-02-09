@@ -1,3 +1,6 @@
+import task.Task;
+import task.tasktypes.*;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 

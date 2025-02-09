@@ -1,5 +1,7 @@
 public class Deadline extends Task {
     private final String deadline;
+
+    // Constants
     private static final String TASK_TYPE = " [D]";
 
     public Deadline(String task, int index, String deadline) {
@@ -10,6 +12,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString()/*.replaceFirst("\\[", "[D][")*/ + String.format(" (by: %s)", deadline);
+        return super.toString() + String.format(" (by: %s)", deadline);
     }
 }

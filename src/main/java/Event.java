@@ -1,6 +1,8 @@
 public class Event extends Task {
     private final String startDate;
     private final String endDate;
+
+    // Constants
     private static final String TASK_TYPE = " [E]";
 
     public Event(String task, int index, String startDate, String endDate) {
@@ -12,7 +14,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString()/*.replaceFirst("\\[", "[E][")*/
+        return super.toString()
             + String.format(" (from: %s,", startDate) + String.format(" to: %s)", endDate);
     }
 }

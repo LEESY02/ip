@@ -1,5 +1,6 @@
 import task.Task;
 import task.tasktypes.*;
+import exceptions.*;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -134,9 +135,9 @@ public class SeungYoon {
             Task newTask = returnCorrectTask(taskType, input, numberOfTasks);
             taskList[numberOfTasks] = newTask;
             printAddTaskMessage(newTask);
-
             numberOfTasks += 1;
         } catch (NoSuchElementException e) {
+        //} catch (InvalidFlagException e) {
             printErrorMessage(TAG_ERROR);
         }
     }
@@ -167,7 +168,11 @@ public class SeungYoon {
         String currentWord = EMPTY_STRING;
         while (!currentWord.equals(DEADLINE_BY_FLAG)) {
             task += WHITESPACE + currentWord;
+            //try {
             currentWord = sc.next();
+            //} catch (NoSuchElementException e) {
+            //    throw new InvalidFlagException(TAG_ERROR);
+            //}
         }
         String deadline = sc.nextLine();
         sc.close();
@@ -179,17 +184,26 @@ public class SeungYoon {
         String currentWord = EMPTY_STRING;
         while (!currentWord.equals(EVENT_FROM_FLAG)) {
             task += WHITESPACE + currentWord;
+            //try {
             currentWord = sc.next();
+            //} catch (NoSuchElementException e) {
+            //    throw new InvalidFlagException(TAG_ERROR);
+            //}
         }
         String startDate = EMPTY_STRING;
         currentWord = EMPTY_STRING;
         while (!currentWord.equals(EVENT_TO_FLAG)) {
             startDate += WHITESPACE + currentWord;
+            //try {
             currentWord = sc.next();
+            //} catch (NoSuchElementException e) {
+            //    throw new InvalidFlagException(TAG_ERROR);
+            //}
         }
         String endDate = sc.nextLine();
         sc.close();
         return new Event(task.strip(), index, startDate.strip(), endDate.strip());
+
     }
 
     private static Task returnTask(Scanner sc, String task, int index) {
@@ -212,6 +226,7 @@ public class SeungYoon {
                 taskList[index].setComplete();
                 printMarkedMessage(taskList, index);
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            //} catch (InvalidIndexException e) {
                 printErrorMessage(e.toString());
             }
 
@@ -225,6 +240,7 @@ public class SeungYoon {
                 taskList[index].setIncomplete();
                 printUnmarkedMessage(taskList, index);
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            //} catch (InvalidIndexException e) {
                 printErrorMessage(e.toString());
             }
         }

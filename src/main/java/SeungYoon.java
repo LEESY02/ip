@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /*
@@ -11,31 +11,43 @@ import java.util.Scanner;
 
 public class SeungYoon {
     private static int numberOfTasks = 0;
+    private static Task[] taskList = new Task[100];
 
     // String Constants
-    public static final String NEW_LINE = "____________________________________________________________\n";
-    public static final String NEW_LINE_TAB = "\t____________________________________________________________\n";
-    public static final String LINE_TAB = "\t____________________________________________________________";
-    public static final String TAB = "\t";
-    public static final String ENTER = "\n";
-    public static final String EMPTY_STRING = "";
-    public static final String WHITESPACE = " ";
+    private static final String NEW_LINE = "____________________________________________________________\n";
+    private static final String NEW_LINE_TAB = "\t____________________________________________________________\n";
+    private static final String LINE_TAB = "\t____________________________________________________________";
+    private static final String TAB = "\t";
+    private static final String ENTER = "\n";
+    private static final String EMPTY_STRING = "";
+    private static final String WHITESPACE = " ";
 
     // Command names
-    public static final String LIST = "list";
-    public static final String MARK = "mark";
-    public static final String UNMARK = "unmark";
-    public static final String EXIT_APP = "bye";
+    private static final String LIST = "list";
+    private static final String MARK = "mark";
+    private static final String UNMARK = "unmark";
+    private static final String EXIT_APP = "bye";
 
     // Task names
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
 
     // Flags i.e.: /flagName
-    public static final String DEADLINE_BY_FLAG = "/by";
-    public static final String EVENT_FROM_FLAG = "/from";
-    public static final String EVENT_TO_FLAG = "/to";
+    private static final String DEADLINE_BY_FLAG = "/by";
+    private static final String EVENT_FROM_FLAG = "/from";
+    private static final String EVENT_TO_FLAG = "/to";
+
+    // Error message
+    private static final String ERROR_MESSAGE = NEW_LINE_TAB + TAB + "Error caught: %s" + ENTER + NEW_LINE_TAB;
+    private static final String RE_ENTER_COMMAND = "Please re-enter a valid command";
+    private static final String TAG_ERROR = "Please re-enter a valid tag" + ENTER +
+        TAB + TAB + "- '/by' for deadline" + ENTER +
+        TAB + TAB + "- '/from' and '/to' for event";
+    //private static final String IOOBE = "Integer out of bounds";
+    private static void printErrorMessage(String errorType) {
+        System.out.println(String.format(ERROR_MESSAGE, errorType));
+    }
 
 
     // Main
@@ -45,9 +57,8 @@ public class SeungYoon {
         Scanner sc = new Scanner(System.in);
         String nextLine = sc.nextLine();
 
-        Task[] taskList = new Task[100];
         while (!nextLine.equals(EXIT_APP)) {
-            taskList = executeCommand(taskList, nextLine);
+            executeCommand(taskList, nextLine);
             nextLine = sc.nextLine();
         }
         sc.close();
@@ -65,12 +76,12 @@ public class SeungYoon {
     // End of Main
 
     // Execute commands based on the 1st word of the input
-    private static Task[] executeCommand(Task[] taskList, String input) {
+    private static void executeCommand(Task[] taskList, String input) {
         Scanner sc = new Scanner(input);
         String command = sc.next();
-        String task = EMPTY_STRING;
+        String taskDetails = EMPTY_STRING;
         if (sc.hasNextLine()) {
-            task = sc.nextLine().strip();
+            taskDetails = sc.nextLine().strip();
         }
         sc.close();
 
@@ -79,16 +90,23 @@ public class SeungYoon {
             printTaskList(taskList);
             break;
         case MARK:
-            mark(taskList, task);
+            mark(taskList, taskDetails);
             break;
         case UNMARK:
-            unmark(taskList, task);
+            unmark(taskList, taskDetails);
+            break;
+        case TODO:
+            addTask(taskList, TODO, taskDetails);
+            break;
+        case DEADLINE:
+            addTask(taskList, DEADLINE, taskDetails);
+            break;
+        case EVENT:
+            addTask(taskList, EVENT, taskDetails);
             break;
         default:
-            taskList = addTask(taskList, input);
+            printErrorMessage(RE_ENTER_COMMAND);
         }
-
-        return taskList;
     }
     // end of command execution algorithm
 
@@ -108,18 +126,20 @@ public class SeungYoon {
     // end of list
 
     // Add algorithm
-    private static Task[] addTask(Task[] taskList, String input) {
-        Task newTask = returnCorrectTask(input, numberOfTasks);
-        taskList[numberOfTasks] = newTask;
-        printAddTaskMessage(newTask);
+    private static void addTask(Task[] taskList, String taskType, String input) {
+        try {
+            Task newTask = returnCorrectTask(taskType, input, numberOfTasks);
+            taskList[numberOfTasks] = newTask;
+            printAddTaskMessage(newTask);
 
-        numberOfTasks += 1;
-        return taskList;
+            numberOfTasks += 1;
+        } catch (NoSuchElementException e) {
+            printErrorMessage(TAG_ERROR);
+        }
     }
 
-    private static Task returnCorrectTask(String input, int index) {
+    private static Task returnCorrectTask(String taskType, String input, int index) {
         Scanner sc = new Scanner(input);
-        String taskType = sc.next();
 
         switch (taskType) {
         case TODO:
@@ -184,17 +204,26 @@ public class SeungYoon {
     // "mark" / "unmark" command: Mark as done or undone
     private static void mark(Task[] taskList, String indexString) {
         if (!indexString.isBlank()) {
-            int index = Integer.parseInt(indexString) - 1;
-            taskList[index].setComplete();
-            printMarkedMessage(taskList, index);
+            try { // in case user inputs invalid index
+                int index = Integer.parseInt(indexString) - 1;
+                taskList[index].setComplete();
+                printMarkedMessage(taskList, index);
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                printErrorMessage(e.toString());
+            }
+
         }
     }
 
     private static void unmark(Task[] taskList, String indexString) {
         if (!indexString.isBlank()) {
-            int index = Integer.parseInt(indexString) - 1;
-            taskList[index].setIncomplete();
-            printUnmarkedMessage(taskList, index);
+            try { // in case user inputs invalid index
+                int index = Integer.parseInt(indexString) - 1;
+                taskList[index].setIncomplete();
+                printUnmarkedMessage(taskList, index);
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                printErrorMessage(e.toString());
+            }
         }
     }
 

@@ -3,6 +3,8 @@ public class Task {
     private final int index;
     private boolean completionStatus;
     protected String taskType;
+
+    // Constants
     private final static String COMPLETE_MARK = "[X] ";
     private final static String INCOMPLETE_MARK = "[ ] ";
     private static final String TASK_TYPE = " [ ]";

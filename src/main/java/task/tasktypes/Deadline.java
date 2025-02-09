@@ -1,3 +1,7 @@
+package task.tasktypes;
+
+import task.Task;
+
 public class Deadline extends Task {
     private final String deadline;
 

@@ -1,3 +1,7 @@
+package task.tasktypes;
+
+import task.Task;
+
 public class Event extends Task {
     private final String startDate;
     private final String endDate;

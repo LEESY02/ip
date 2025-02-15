@@ -1,14 +1,12 @@
 package task.tasktypes;
 
 import task.Task;
+import static data.Constants.*;
 
 public class ToDo extends Task {
-    // Constants
-    private static final String TASK_TYPE = " [T]";
-
     public ToDo(String task) {
         super(task);
-        super.taskType = TASK_TYPE;
+        super.taskType = TASK_TYPE_TODO;
     }
 
     @Override

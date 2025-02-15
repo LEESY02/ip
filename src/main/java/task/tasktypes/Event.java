@@ -1,20 +1,24 @@
 package task.tasktypes;
 
 import task.Task;
+import static data.Constants.*;
 
 public class Event extends Task {
     private final String startDate;
     private final String endDate;
 
-    // Constants
-    private static final String TASK_TYPE = " [E]";
-
-    public Event(String task, int index, String startDate, String endDate) {
-        super(task, index);
+    public Event(String task, String startDate, String endDate) {
+        super(task);
         this.startDate = startDate;
         this.endDate = endDate;
-        super.taskType = TASK_TYPE;
+        super.taskType = TASK_TYPE_EVENT;
     }
+
+    @Override
+    public String getStartDate() { return startDate; }
+
+    @Override
+    public String getEndDate() { return endDate; }
 
     @Override
     public String toString() {

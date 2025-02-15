@@ -1,19 +1,16 @@
 package task;
 
+import static data.Constants.*;
+
 public class Task {
     private final String task;
-    private final int index;
     private boolean completionStatus;
     protected String taskType;
 
-    // Constants
-    private final static String COMPLETE_MARK = "[X] ";
-    private final static String INCOMPLETE_MARK = "[ ] ";
-    private static final String TASK_TYPE = " [ ]";
 
-    public Task(String task, int index) {
+
+    public Task(String task) {
         this.task = task;
-        this.index = index;
         this.completionStatus = false;
         this.taskType = TASK_TYPE;
     }
@@ -31,15 +28,16 @@ public class Task {
     public String getTask() {
         return task;
     }
-    public int getIndex() {
-        return index;
-    }
 
-    // Private getters for toString()
-    private String getTaskType() {
+    // getters for taskType
+    public String getTaskType() {
         return taskType;
     }
-    private String getIndexString() { return String.format("%d.", getIndex() + 1); }
+
+    // Getters to be overwritten
+    public String getDeadline() { return EMPTY_STRING; }
+    public String getStartDate() { return EMPTY_STRING; }
+    public String getEndDate() { return EMPTY_STRING; }
 
     @Override
     public String toString() {
@@ -49,6 +47,6 @@ public class Task {
         } else {
             isCompletedCheckMark = INCOMPLETE_MARK;
         }
-        return this.getIndexString() + this.getTaskType() + isCompletedCheckMark + this.getTask();
+        return this.getTaskType() + isCompletedCheckMark + this.getTask();
     }
 }

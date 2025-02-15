@@ -8,8 +8,8 @@ public class Deadline extends Task {
     // Constants
     private static final String TASK_TYPE = " [D]";
 
-    public Deadline(String task, int index, String deadline) {
-        super(task, index);
+    public Deadline(String task, String deadline) {
+        super(task);
         this.deadline = deadline;
         super.taskType = TASK_TYPE;
     }

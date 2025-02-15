@@ -2,6 +2,7 @@ import task.Task;
 import task.tasktypes.*;
 import exceptions.*;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ import java.util.Scanner;
 
 public class SeungYoon {
     private static int numberOfTasks = 0;
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     // String Constants
     private static final String NEW_LINE = "____________________________________________________________\n";
@@ -30,6 +31,7 @@ public class SeungYoon {
     private static final String LIST = "list";
     private static final String MARK = "mark";
     private static final String UNMARK = "unmark";
+    private static final String DELETE = "delete";
     private static final String EXIT_APP = "bye";
 
     // Task names
@@ -45,6 +47,8 @@ public class SeungYoon {
     // Error message
     private static final String ERROR_MESSAGE = NEW_LINE_TAB + TAB + "Error caught: %s" + ENTER + NEW_LINE_TAB;
     private static final String RE_ENTER_COMMAND = "Please re-enter a valid command";
+    private static final String INVALID_INDEX = "Please re-enter a valid index";
+    private static final String OUT_OF_BOUND_INDEX = "Please re-enter a valid command";
     private static final String TAG_ERROR = "Please re-enter a valid tag" + ENTER +
         TAB + TAB + "- '/by' for deadline" + ENTER +
         TAB + TAB + "- '/from' and '/to' for event";
@@ -62,7 +66,7 @@ public class SeungYoon {
         String nextLine = sc.nextLine();
 
         while (!nextLine.equals(EXIT_APP)) {
-            executeCommand(taskList, nextLine);
+            executeCommand(nextLine);
             nextLine = sc.nextLine();
         }
         sc.close();
@@ -80,7 +84,7 @@ public class SeungYoon {
     // End of Main
 
     // Execute commands based on the 1st word of the input
-    private static void executeCommand(Task[] taskList, String input) {
+    private static void executeCommand(String input) {
         Scanner sc = new Scanner(input);
         String command = sc.next();
         String taskDetails = EMPTY_STRING;
@@ -91,22 +95,25 @@ public class SeungYoon {
 
         switch (command) {
         case LIST:
-            printTaskList(taskList);
+            printTaskList();
             break;
         case MARK:
-            mark(taskList, taskDetails);
+            mark(taskDetails);
             break;
         case UNMARK:
-            unmark(taskList, taskDetails);
+            unmark(taskDetails);
             break;
         case TODO:
-            addTask(taskList, TODO, taskDetails);
+            addTask(TODO, taskDetails);
             break;
         case DEADLINE:
-            addTask(taskList, DEADLINE, taskDetails);
+            addTask(DEADLINE, taskDetails);
             break;
         case EVENT:
-            addTask(taskList, EVENT, taskDetails);
+            addTask(EVENT, taskDetails);
+            break;
+        case DELETE:
+            deleteTask(taskDetails);
             break;
         default:
             printErrorMessage(RE_ENTER_COMMAND);
@@ -115,14 +122,10 @@ public class SeungYoon {
     // end of command execution algorithm
 
     // "list" command: Print
-    private static void printTaskList(Task[] taskList) {
+    private static void printTaskList() {
         System.out.print(NEW_LINE_TAB);
-        for (int i = 0; i < taskList.length; i += 1) {
-            if (taskList[i] != null) {
-                System.out.println(TAB + taskList[i].toString());
-            } else {
-                break;
-            }
+        for (int i = 0; i < taskList.size(); i += 1) {
+            System.out.println(TAB + (i + 1) + WHITESPACE + taskList.get(i).toString());
         }
         System.out.println(String.format(TAB + "You have %d tasks", numberOfTasks));
         System.out.println(NEW_LINE_TAB);
@@ -130,10 +133,10 @@ public class SeungYoon {
     // end of list
 
     // Add algorithm
-    private static void addTask(Task[] taskList, String taskType, String input) {
+    private static void addTask(String taskType, String input) {
         try {
             Task newTask = returnCorrectTask(taskType, input, numberOfTasks);
-            taskList[numberOfTasks] = newTask;
+            taskList.add(newTask);
             printAddTaskMessage(newTask);
             numberOfTasks += 1;
         } catch (NoSuchElementException e) {
@@ -147,23 +150,23 @@ public class SeungYoon {
 
         switch (taskType) {
         case TODO:
-            return returnToDo(sc, index);
+            return returnToDo(sc);
         case DEADLINE:
-            return returnDeadline(sc, index);
+            return returnDeadline(sc);
         case EVENT:
-            return returnEvent(sc, index);
+            return returnEvent(sc);
         default:
-            return returnTask(sc, input, index);
+            return returnTask(sc, input);
         }
     }
 
-    private static ToDo returnToDo(Scanner sc, int index) {
+    private static ToDo returnToDo(Scanner sc) {
         String task = sc.nextLine();
         sc.close();
-        return new ToDo(task.strip(), index);
+        return new ToDo(task.strip());
     }
 
-    private static Deadline returnDeadline(Scanner sc, int index) {
+    private static Deadline returnDeadline(Scanner sc) {
         String task = EMPTY_STRING;
         String currentWord = EMPTY_STRING;
         while (!currentWord.equals(DEADLINE_BY_FLAG)) {
@@ -176,10 +179,10 @@ public class SeungYoon {
         }
         String deadline = sc.nextLine();
         sc.close();
-        return new Deadline(task.strip(), index, deadline.strip());
+        return new Deadline(task.strip(), deadline.strip());
     }
 
-    private static Event returnEvent(Scanner sc, int index) {
+    private static Event returnEvent(Scanner sc) {
         String task = EMPTY_STRING;
         String currentWord = EMPTY_STRING;
         while (!currentWord.equals(EVENT_FROM_FLAG)) {
@@ -202,13 +205,13 @@ public class SeungYoon {
         }
         String endDate = sc.nextLine();
         sc.close();
-        return new Event(task.strip(), index, startDate.strip(), endDate.strip());
+        return new Event(task.strip(), startDate.strip(), endDate.strip());
 
     }
 
-    private static Task returnTask(Scanner sc, String task, int index) {
+    private static Task returnTask(Scanner sc, String task) {
         sc.close();
-        return new Task(task, index);
+        return new Task(task);
     }
 
     private static void printAddTaskMessage(Task task) {
@@ -218,13 +221,34 @@ public class SeungYoon {
     }
     // end of add
 
+    // Delete algorithm
+    private static void deleteTask(String input) {
+        try {
+            int index = Integer.parseInt(input) - 1;
+            printDeleteTaskMessage(index);
+            taskList.remove(index);
+            numberOfTasks -= 1;
+        } catch (NumberFormatException e) {
+            printErrorMessage(INVALID_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            printErrorMessage(OUT_OF_BOUND_INDEX);
+        }
+    }
+
+    private static void printDeleteTaskMessage(int index) {
+        System.out.println(
+            NEW_LINE_TAB + TAB + "LESS WORK TO DO WOOHOOO: " + taskList.get(index).toString() + ENTER + NEW_LINE_TAB
+        );
+    }
+    // end of delete
+
     // "mark" / "unmark" command: Mark as done or undone
-    private static void mark(Task[] taskList, String indexString) {
+    private static void mark(String indexString) {
         if (!indexString.isBlank()) {
             try { // in case user inputs invalid index
                 int index = Integer.parseInt(indexString) - 1;
-                taskList[index].setComplete();
-                printMarkedMessage(taskList, index);
+                taskList.get(index).setComplete();
+                printMarkedMessage(index);
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             //} catch (InvalidIndexException e) {
                 printErrorMessage(e.toString());
@@ -233,12 +257,12 @@ public class SeungYoon {
         }
     }
 
-    private static void unmark(Task[] taskList, String indexString) {
+    private static void unmark(String indexString) {
         if (!indexString.isBlank()) {
             try { // in case user inputs invalid index
                 int index = Integer.parseInt(indexString) - 1;
-                taskList[index].setIncomplete();
-                printUnmarkedMessage(taskList, index);
+                taskList.get(index).setIncomplete();
+                printUnmarkedMessage(index);
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             //} catch (InvalidIndexException e) {
                 printErrorMessage(e.toString());
@@ -246,20 +270,20 @@ public class SeungYoon {
         }
     }
 
-    private static void printMarkedMessage(Task[] taskList, int taskIndex) {
+    private static void printMarkedMessage(int taskIndex) {
         System.out.println(
             NEW_LINE_TAB +
             TAB + "Good work brudda, the deed has been done, make sure to hydrate" + ENTER +
-            TAB + TAB + taskList[taskIndex].toString() + ENTER +
+            TAB + TAB + taskList.get(taskIndex).toString() + ENTER +
             NEW_LINE_TAB
         );
     }
 
-    private static void printUnmarkedMessage(Task[] taskList, int taskIndex) {
+    private static void printUnmarkedMessage(int taskIndex) {
         System.out.println(
             NEW_LINE_TAB +
             TAB + "Get back to work!" + ENTER +
-            TAB + TAB + taskList[taskIndex].toString() + ENTER +
+            TAB + TAB + taskList.get(taskIndex).toString() + ENTER +
             NEW_LINE_TAB
         );
     }

@@ -9,8 +9,8 @@ public class Event extends Task {
     // Constants
     private static final String TASK_TYPE = " [E]";
 
-    public Event(String task, int index, String startDate, String endDate) {
-        super(task, index);
+    public Event(String task, String startDate, String endDate) {
+        super(task);
         this.startDate = startDate;
         this.endDate = endDate;
         super.taskType = TASK_TYPE;

@@ -1,6 +1,8 @@
 //import exceptions.*;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 
@@ -29,6 +31,13 @@ public class SeungYoon {
                 Scanner sc = new Scanner(f);
                 sy = new TaskManager(sc);
             } catch (FileNotFoundException | NumberFormatException e) {
+                printErrorMessage(e.getMessage());
+            }
+        }
+        else {
+            try {
+                boolean fileCreated = f.createNewFile();
+            } catch (IOException e) {
                 printErrorMessage(e.getMessage());
             }
         }

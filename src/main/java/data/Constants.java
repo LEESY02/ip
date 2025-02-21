@@ -17,7 +17,8 @@ public final class Constants {
     public static final String STRING_SEPARATOR = " | ";
 
     // File path and saving
-    public static final String SAVE_FILE = "src/main/java/data/lastKnownState.txt";
+    //"src/main/java/data/lastKnownState.txt"
+    public static final String SAVE_FILE = "lastKnownState.txt";
     public static final int TASK_TYPE_INDEX = 0;
     public static final int COMPLETION_INDEX = 2;
     public static final int DESCRIPTION_INDEX = 4;

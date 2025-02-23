@@ -1,13 +1,16 @@
 package task.tasktypes;
 
 import task.Task;
+
+import java.time.LocalDate;
+
 import static data.Constants.*;
 
 public class Event extends Task {
-    private final String startDate;
-    private final String endDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
-    public Event(String task, String startDate, String endDate) {
+    public Event(String task, LocalDate startDate, LocalDate endDate) {
         super(task);
         this.startDate = startDate;
         this.endDate = endDate;
@@ -15,10 +18,15 @@ public class Event extends Task {
     }
 
     @Override
-    public String getStartDate() { return startDate; }
+    public LocalDate dueDate() {
+        return endDate;
+    }
 
     @Override
-    public String getEndDate() { return endDate; }
+    public String getStartDate() { return startDate.toString(); }
+
+    @Override
+    public String getEndDate() { return endDate.toString(); }
 
     @Override
     public String toString() {

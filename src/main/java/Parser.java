@@ -29,6 +29,10 @@ public class Parser {
             return new Command(EVENT, taskDetails);
         case DELETE:
             return new Command(DELETE, taskDetails);
+        case DUE:
+            return new Command(DUE, taskDetails);
+        case OVERDUE:
+            return new Command(OVERDUE, taskDetails);
         case EXIT_APP:
             return new Command(EXIT_APP, taskDetails);
         default:

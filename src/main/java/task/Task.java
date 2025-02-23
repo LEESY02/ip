@@ -1,5 +1,7 @@
 package task;
 
+import java.time.LocalDate;
+
 import static data.Constants.*;
 
 public class Task {
@@ -38,6 +40,7 @@ public class Task {
     public String getDeadline() { return EMPTY_STRING; }
     public String getStartDate() { return EMPTY_STRING; }
     public String getEndDate() { return EMPTY_STRING; }
+    public LocalDate dueDate() { return LocalDate.of(1,1,1); }
 
     @Override
     public String toString() {

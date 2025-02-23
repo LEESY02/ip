@@ -33,6 +33,9 @@ public class Command {
         case DELETE:
             tm.deleteTask(description, ui);
             break;
+        case SEARCH:
+            ui.printList(tm.getTaskList(description));
+            break;
         case EXIT_APP:
             break;
         default:

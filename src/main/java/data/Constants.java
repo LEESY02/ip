@@ -49,6 +49,7 @@ public final class Constants {
     public static final String MARK = "mark";
     public static final String UNMARK = "unmark";
     public static final String DELETE = "delete";
+    public static final String SEARCH = "search";
     public static final String EXIT_APP = "bye";
 
     // Task names

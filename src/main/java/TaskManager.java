@@ -29,6 +29,16 @@ public class TaskManager {
         return this.taskList;
     }
 
+    public ArrayList<Task> getTaskList(String keyword) {
+        ArrayList<Task> taskListWithKeyWord = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.toString().contains(keyword)) {
+                taskListWithKeyWord.add(task);
+            }
+        }
+        return taskListWithKeyWord;
+    }
+
     // Add algorithm
     public void addTask(String taskType, String input, UI ui) {
         try {

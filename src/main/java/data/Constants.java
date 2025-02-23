@@ -8,7 +8,7 @@ public final class Constants {
     // String Constants
     public static final String NEW_LINE = "____________________________________________________________\n";
     public static final String NEW_LINE_TAB = "\t____________________________________________________________\n";
-    public static final String LINE_TAB = "\t____________________________________________________________";
+    public static final String LINE = "____________________________________________________________";
     public static final String TAB = "\t";
     public static final String ENTER = "\n";
     public static final String EMPTY_STRING = "";

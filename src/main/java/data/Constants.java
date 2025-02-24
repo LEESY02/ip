@@ -49,6 +49,8 @@ public final class Constants {
     public static final String MARK = "mark";
     public static final String UNMARK = "unmark";
     public static final String DELETE = "delete";
+    public static final String DUE = "due";
+    public static final String OVERDUE = "overdue";
     public static final String EXIT_APP = "bye";
 
     // Task names
@@ -67,7 +69,8 @@ public final class Constants {
     public static final String INVALID_INDEX = "Please re-enter a valid index (i.e.: 'delete 1' to delete task number 1)";
     public static final String TAG_ERROR = "Please re-enter a valid tag" + ENTER +
         TAB + TAB + "- '/by' for deadline" + ENTER +
-        TAB + TAB + "- '/from' and '/to' for event";
+        TAB + TAB + "- '/from' and '/to' for event" + ENTER +
+        TAB + TAB + "- Dates must be in the format of 'YYYY-MM-DD' (Time values not accepted)";
     public static final String OUT_OF_BOUND_INDEX = String.format("Integer out of bounds");
     public static void printErrorMessage(String errorType) {
         System.out.println(String.format(ERROR_MESSAGE, errorType));

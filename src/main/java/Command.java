@@ -33,6 +33,12 @@ public class Command {
         case DELETE:
             tm.deleteTask(description, ui);
             break;
+        case DUE:
+            ui.printList(tm.getTaskListDueDate(description));
+            break;
+        case OVERDUE:
+            ui.printList(tm.getTaskListOverdue());
+            break;
         case EXIT_APP:
             break;
         default:

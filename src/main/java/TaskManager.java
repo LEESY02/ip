@@ -5,6 +5,8 @@ import task.tasktypes.Deadline;
 import task.tasktypes.Event;
 import task.tasktypes.ToDo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -29,6 +31,31 @@ public class TaskManager {
         return this.taskList;
     }
 
+    public ArrayList<Task> getTaskListDueDate(String dueDateString) {
+        LocalDate dueDate = returnValidDate(dueDateString);
+        ArrayList<Task> taskListDueDate = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if ((task instanceof Deadline || task instanceof Event) && task.dueDate().isBefore(dueDate)) {
+                taskListDueDate.add(task);
+            }
+        }
+        return taskListDueDate;
+    }
+
+    public ArrayList<Task> getTaskListOverdue() {
+        LocalDate dueDate = LocalDate.now();
+        ArrayList<Task> taskListOverdue = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if ((task instanceof Deadline || task instanceof Event) &&
+                task.dueDate().isBefore(dueDate) &&
+                !task.getCompletionStatus()) {
+                
+                taskListOverdue.add(task);
+            }
+        }
+        return taskListOverdue;
+    }
+
     // Add algorithm
     public void addTask(String taskType, String input, UI ui) {
         try {
@@ -36,7 +63,7 @@ public class TaskManager {
             taskList.add(newTask);
             ui.printAddTaskMessage(newTask);
             numberOfTasks += 1;
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | NumberFormatException e) {
             //} catch (InvalidFlagException e) {
             printErrorMessage(TAG_ERROR);
         }
@@ -63,20 +90,31 @@ public class TaskManager {
         return new ToDo(task.strip());
     }
 
+    private static LocalDate returnValidDate(String input) {
+        try {
+            String time[] = input.split("-");
+            int year = Integer.parseInt(time[0].strip());
+            int month = Integer.parseInt(time[1].strip());
+            int day = Integer.parseInt(time[2].strip());
+            return LocalDate.of(year, month, day);
+        } catch (Exception e) {
+            throw new NumberFormatException(e.toString());
+        }
+    }
+
     private static Deadline returnDeadline(Scanner sc) {
         String task = EMPTY_STRING;
         String currentWord = EMPTY_STRING;
         while (!currentWord.equals(DEADLINE_BY_FLAG)) {
             task += WHITESPACE + currentWord;
-            //try {
             currentWord = sc.next();
-            //} catch (NoSuchElementException e) {
-            //    throw new InvalidFlagException(TAG_ERROR);
-            //}
         }
         String deadline = sc.nextLine();
+
+        LocalDate ld = returnValidDate(deadline);
+
         sc.close();
-        return new Deadline(task.strip(), deadline.strip());
+        return new Deadline(task.strip(), ld /*deadline.strip()*/);
     }
 
     private static Event returnEvent(Scanner sc) {
@@ -84,25 +122,21 @@ public class TaskManager {
         String currentWord = EMPTY_STRING;
         while (!currentWord.equals(EVENT_FROM_FLAG)) {
             task += WHITESPACE + currentWord;
-            //try {
             currentWord = sc.next();
-            //} catch (NoSuchElementException e) {
-            //    throw new InvalidFlagException(TAG_ERROR);
-            //}
         }
         String startDate = EMPTY_STRING;
         currentWord = EMPTY_STRING;
         while (!currentWord.equals(EVENT_TO_FLAG)) {
             startDate += WHITESPACE + currentWord;
-            //try {
             currentWord = sc.next();
-            //} catch (NoSuchElementException e) {
-            //    throw new InvalidFlagException(TAG_ERROR);
-            //}
         }
         String endDate = sc.nextLine();
+
+        LocalDate ldStart = returnValidDate(startDate.strip());
+        LocalDate ldEnd = returnValidDate(endDate.strip());
+
         sc.close();
-        return new Event(task.strip(), startDate.strip(), endDate.strip());
+        return new Event(task.strip(), ldStart, ldEnd);
 
     }
 
@@ -135,7 +169,6 @@ public class TaskManager {
                 taskList.get(index).setComplete();
                 ui.printMarkedMessage(this.getTaskList(), index);
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-                //} catch (InvalidIndexException e) {
                 printErrorMessage(e.toString());
             }
 
@@ -149,7 +182,6 @@ public class TaskManager {
                 taskList.get(index).setIncomplete();
                 ui.printUnmarkedMessage(this.getTaskList(), index);
             } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-                //} catch (InvalidIndexException e) {
                 printErrorMessage(e.toString());
             }
         }

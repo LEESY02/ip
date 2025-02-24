@@ -1,5 +1,8 @@
 package data;
 
+/*
+ * A Class of static constants used by other classes
+ */
 public final class Constants {
     private Constants() {
         // No need to instantiate the class, we can hide its constructor
@@ -36,8 +39,8 @@ public final class Constants {
     }
 
     // Tasktype related flags
-    public final static String COMPLETE_MARK = "[X] ";
-    public final static String INCOMPLETE_MARK = "[ ] ";
+    public static final String COMPLETE_MARK = "[X] ";
+    public static final String INCOMPLETE_MARK = "[ ] ";
     public static final String TASK_TYPE = "[ ]";
     public static final String TASK_TYPE_TODO = "[T]";
     public static final String TASK_TYPE_DEADLINE = "[D]";

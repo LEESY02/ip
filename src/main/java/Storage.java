@@ -8,22 +8,22 @@ import java.util.Scanner;
 import static data.Constants.*;
 import task.Task;
 
+/*
+ * Reads save state and stores them in a Scanner object
+ */
 public class Storage {
     private Scanner sc;
 
-    public Scanner returnScanner() {
-        return sc;
-    }
-
+    /*
+     * A public constructor that reads the txt file defined under 'SAVE_FILE' and creates a scanner object for reading
+     */
     public Storage() {
         File f = new File(SAVE_FILE);
 
         if(f.exists())
         {
             try {
-                //Scanner sc = new Scanner(f);
                 this.sc = new Scanner(f);
-                //sy = new TaskManager(sc);
             } catch (FileNotFoundException | NumberFormatException e) {
                 printErrorMessage(e.getMessage());
             }
@@ -32,6 +32,11 @@ public class Storage {
         }
     }
 
+    /*
+     * A static method that returns an ArrayList of Task objects based on the save state defined in the Scanner object
+     * @param sc Scanner object with the save state
+     * @return an ArrayList<Task> object of tasks
+     */
     public static ArrayList<Task> populateArrayList(Scanner sc) {
         ArrayList<Task> newTaskList = new ArrayList<>();
         String line;
@@ -46,6 +51,11 @@ public class Storage {
         return newTaskList;
     }
 
+    /*
+     * A static method that saves the state of a TaskManager based on the ArrayList given at file location 'SAVE_FILE'
+     * @param an ArrayList<Task> object of tasks meant for saving
+     * IOException catch for FileWriter errors
+     */
     public static void saveState(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(SAVE_FILE);
@@ -64,11 +74,18 @@ public class Storage {
                         eventDescriptor(t.getTask(), t.getStartDate(), t.getEndDate())));
                     break;
                 }
-                //fw.write(saveFormat(TODO, t.getCompletionStatus() ? COMPLETED_FLAG : INCOMPLETE_FLAG, t.))
             }
             fw.close();
         } catch (IOException e) {
             printErrorMessage(e.getMessage());
         }
     }
+
+    /*
+     * @return Scanner object in this class, used for instantiating a new TaskManager object
+     */
+    public Scanner returnScanner() {
+        return sc;
+    }
+
 }

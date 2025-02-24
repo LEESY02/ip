@@ -1,10 +1,5 @@
 //import exceptions.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-import java.io.File;
-
 import static data.Constants.*;
 
 /*
@@ -18,7 +13,15 @@ import static data.Constants.*;
 public class SeungYoon {
     public static final String VERSION = "Seung Yoon - Version 1.0";
 
-    // Main
+    /*
+     * Main function of the entire chatbot,
+     * creates new instances of
+     * 1. UI for printing strings and receiving inputs from user
+     * 2. Storage for loading and saving previous tasks
+     * 3. TaskManager to handle the operations regarding the tasks
+     * Input received from the UI(user) is parsed using the Parser class and made into a Command instance for execution
+     * Chatbot will wait for exit command (EXIT_APP) before saving and exiting program
+     */
     public static void main(String[] args) {
         UI ui = new UI();
         ui.printIntroMessage();
@@ -37,6 +40,5 @@ public class SeungYoon {
         Storage.saveState(sy.getTaskList());
         ui.printOutroMessage();
     }
-    // End of Main
 
 }

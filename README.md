@@ -1,26 +1,36 @@
-# Duke project template
+# Introducing: Seung Yoon, <br> your friendly chatbot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Seung Yoon is your friendly neighbourhood CEG student, he comes with a few useful features, which are listed below.
 
-## Setting up in Intellij
+## How do I order Seung Yoon around?
+### Things you can do with Seung Yoon:
+1. Save tasks that require completion
+2. Mark them as done/undone
+3. List them out for your viewing
+4. Check for upcoming tasks and overdue tasks
+5. Search for specific tasks
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+### Commands:
+1. Adding tasks
+   <br>a. `todo <Description for task>`
+   <br>b. `deadline <Description for task> /by <Deadline for task>`
+   <br>c. `event <Description for task> /from <Start date for task> /to <End date for task>`
+   <br> Deadlines and events require user input for dates in the format of 'YYYY-MM-DD'
+2. Marking tasks
+   <br>a. `mark \<Index to mark as done>`
+   <br>b. `unmark \<Index to mark as undone>`
+3. Listing tasks
+   <br> a. `list` (lists out all the tasks)
+   <br> b. `due <Due date 'YYYY-MM-DD'>` (lists out all tasks due by given date)
+   <br> c. `overdue` (lists out all overdue tasks, as of the current date)
+4. Search for tasks
+   <br> a. `search <keyword>` (Searches and lists all tasks that contains the keyword in the description of the task)
+
    ```
    Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   Seung Yoon
    ```
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+So what are you waiting for, go ahead and get your hands on the newest version of Seung Yoon, 
+your friendly neighbourhood CEG student!

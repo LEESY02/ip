@@ -5,30 +5,32 @@ import static data.Constants.*;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    //private final String deadline;
     private final LocalDate deadline;
 
-    public Deadline(String task, LocalDate deadline /*String deadline*/) {
     /*
      * Instantiates parent Task class, and defines the deadline of the task
      * @param task Parameters for parent Task constructor
      * @deadline The due date of this Task object
      */
+    public Deadline(String task, LocalDate deadline) {
         super(task);
         this.deadline = deadline;
         super.taskType = TASK_TYPE_DEADLINE;
     }
 
     /*
-     * @return Returns deadline, used for saving
+     * @return Returns deadline in the form of LocalDate
      */
     @Override
     public LocalDate dueDate() {
         return deadline;
     }
 
+    /*
+     * @return Returns deadline, used for saving
+     */
     @Override
-    public String getDeadline() { return deadline.toString(); /*return deadline;*/ }
+    public String getDeadline() { return deadline.toString(); }
 
     /*
      * Overrides the toString() method present in Task

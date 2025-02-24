@@ -6,7 +6,6 @@ import task.tasktypes.Event;
 import task.tasktypes.ToDo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

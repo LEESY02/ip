@@ -10,13 +10,13 @@ public class Event extends Task {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
-    public Event(String task, LocalDate startDate, LocalDate endDate) {
     /*
      * Instantiates parent Task class, and defines the start and end date of the task
      * @param task Parameters for parent Task constructor
      * @startDate The start date of this Task object
      * @endDate The end date of this Task object
      */
+    public Event(String task, LocalDate startDate, LocalDate endDate) {
         super(task);
         this.startDate = startDate;
         this.endDate = endDate;
@@ -32,11 +32,14 @@ public class Event extends Task {
     }
 
     /*
-     * @return Returns endDate, used for saving
+     * @return Returns startDate, used for saving
      */
     @Override
     public String getStartDate() { return startDate.toString(); }
 
+    /*
+     * @return Returns endDate, used for saving
+     */
     @Override
     public String getEndDate() { return endDate.toString(); }
 

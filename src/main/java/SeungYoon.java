@@ -1,5 +1,3 @@
-//import exceptions.*;
-
 import static data.Constants.*;
 
 /*
@@ -26,7 +24,6 @@ public class SeungYoon {
         UI ui = new UI();
         ui.printIntroMessage();
 
-        // save and read
         Storage storage = new Storage();
         TaskManager sy = new TaskManager(storage.returnScanner());
 

@@ -51,6 +51,7 @@ public final class Constants {
     public static final String DELETE = "delete";
     public static final String DUE = "due";
     public static final String OVERDUE = "overdue";
+    public static final String SEARCH = "search";
     public static final String EXIT_APP = "bye";
 
     // Task names

@@ -49,11 +49,21 @@ public class TaskManager {
             if ((task instanceof Deadline || task instanceof Event) &&
                 task.dueDate().isBefore(dueDate) &&
                 !task.getCompletionStatus()) {
-                
+
                 taskListOverdue.add(task);
             }
         }
         return taskListOverdue;
+    }
+
+    public ArrayList<Task> getTaskList(String keyword) {
+        ArrayList<Task> taskListWithKeyWord = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.toString().contains(keyword)) {
+                taskListWithKeyWord.add(task);
+            }
+        }
+        return taskListWithKeyWord;
     }
 
     // Add algorithm

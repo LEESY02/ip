@@ -14,6 +14,8 @@ public class Parser {
         }
         sc.close();
 
+        return new Command(command, taskDetails);
+        /*
         switch (command) {
         case LIST:
             return new Command(LIST, taskDetails);
@@ -33,11 +35,13 @@ public class Parser {
             return new Command(DUE, taskDetails);
         case OVERDUE:
             return new Command(OVERDUE, taskDetails);
+        case SEARCH:
+            return new Command(SEARCH, taskDetails);
         case EXIT_APP:
             return new Command(EXIT_APP, taskDetails);
         default:
             return new Command("INVALID COMMAND", EMPTY_STRING);
-        }
+        } */
     }
     // end of command execution algorithm
 }

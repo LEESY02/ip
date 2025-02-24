@@ -39,6 +39,9 @@ public class Command {
         case OVERDUE:
             ui.printList(tm.getTaskListOverdue());
             break;
+        case SEARCH:
+            ui.printList(tm.getTaskList(description));
+            break;
         case EXIT_APP:
             break;
         default:

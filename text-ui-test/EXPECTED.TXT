@@ -1,67 +1,107 @@
-____________________________________________________________
-Hello! I'm Seung Yoon	What can I do for you?
-____________________________________________________________
 
-NOT FOUND
-
+Seung Yoon - Version 1.0
 	____________________________________________________________
-	added: [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
+	Hello! I'm Seung Yoon	What can I do for you?
 	____________________________________________________________
 
-	____________________________________________________________
-	added: [D][ ] weekly CS2113 quiz (by: Monday 9pm)
+Enter command: 	____________________________________________________________
+	added: [T][ ] Answer CS2113 tutorial questions
 	____________________________________________________________
 
+Enter command: 	____________________________________________________________
+	Error caught: Invalid date format (Must be: 'YYYY-MM-DD')
 	____________________________________________________________
-	1. [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
-	2. [D][ ] weekly CS2113 quiz (by: Monday 9pm)
+
+Enter command: 	____________________________________________________________
+	added: [D][ ] weekly CS2113 quiz (by: 2025-03-01)
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	1. [T][ ] Answer CS2113 tutorial questions
+	2. [D][ ] weekly CS2113 quiz (by: 2025-03-01)
 	You have 2 tasks
 	____________________________________________________________
 
-	____________________________________________________________
-	added: [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
+Enter command: 	____________________________________________________________
+	added: [E][ ] CS2113 lecture Friday (from: 2025-02-01, to: 2025-03-02)
 	____________________________________________________________
 
-	____________________________________________________________
+Enter command: 	____________________________________________________________
 	Good work brudda, the deed has been done, make sure to hydrate
-		[T][X] <Seung-Yoon>: Answer CS2113 tutorial questions
+		[T][X] Answer CS2113 tutorial questions
 	____________________________________________________________
 
-	____________________________________________________________
-	1. [T][X] <Seung-Yoon>: Answer CS2113 tutorial questions
-	2. [D][ ] weekly CS2113 quiz (by: Monday 9pm)
-	3. [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
+Enter command: 	____________________________________________________________
+	1. [T][X] Answer CS2113 tutorial questions
+	2. [D][ ] weekly CS2113 quiz (by: 2025-03-01)
+	3. [E][ ] CS2113 lecture Friday (from: 2025-02-01, to: 2025-03-02)
 	You have 3 tasks
 	____________________________________________________________
 
-	____________________________________________________________
+Enter command: 	____________________________________________________________
 	Good work brudda, the deed has been done, make sure to hydrate
-		[D][X] weekly CS2113 quiz (by: Monday 9pm)
+		[D][X] weekly CS2113 quiz (by: 2025-03-01)
 	____________________________________________________________
 
-	____________________________________________________________
+Enter command: 	____________________________________________________________
 	Get back to work!
-		[T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
+		[T][ ] Answer CS2113 tutorial questions
 	____________________________________________________________
 
-	____________________________________________________________
-	1. [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
-	2. [D][X] weekly CS2113 quiz (by: Monday 9pm)
-	3. [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
+Enter command: 	____________________________________________________________
+	1. [T][ ] Answer CS2113 tutorial questions
+	2. [D][X] weekly CS2113 quiz (by: 2025-03-01)
+	3. [E][ ] CS2113 lecture Friday (from: 2025-02-01, to: 2025-03-02)
 	You have 3 tasks
 	____________________________________________________________
 
-	____________________________________________________________
-	Error caught: Integer out of bounds
-	____________________________________________________________
-
-	____________________________________________________________
-	LESS WORK TO DO WOOHOOO: [T][ ] <Seung-Yoon>: Answer CS2113 tutorial questions
+Enter command: 	____________________________________________________________
+	Error caught: Invalid search input (Check if you have input a valid string)
 	____________________________________________________________
 
+Enter command: 	____________________________________________________________
+	1. [D][X] weekly CS2113 quiz (by: 2025-03-01)
+	You have 1 tasks
 	____________________________________________________________
-	1. [D][X] weekly CS2113 quiz (by: Monday 9pm)
-	2. [E][ ] CS2113 lecture Friday (from: Friday 4, to: 6pm)
+
+Enter command: 	____________________________________________________________
+	Error caught: Invalid date format (Must be: 'YYYY-MM-DD')
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	You have 0 tasks
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	You have 0 tasks
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	You have 0 tasks
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	1. [T][ ] Answer CS2113 tutorial questions
+	2. [D][X] weekly CS2113 quiz (by: 2025-03-01)
+	3. [E][ ] CS2113 lecture Friday (from: 2025-02-01, to: 2025-03-02)
+	You have 3 tasks
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	Error caught: Please re-enter a valid index (i.e.: 'delete 1' to delete task number 1)
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	LESS WORK TO DO WOOHOOO: [T][ ] Answer CS2113 tutorial questions
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	1. [D][X] weekly CS2113 quiz (by: 2025-03-01)
+	2. [E][ ] CS2113 lecture Friday (from: 2025-02-01, to: 2025-03-02)
 	You have 2 tasks
+	____________________________________________________________
+
+Enter command: 	____________________________________________________________
+	Bye. Hope to see you again soon!
 	____________________________________________________________
 

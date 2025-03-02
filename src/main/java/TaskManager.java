@@ -1,5 +1,6 @@
 import static data.Constants.*;
 
+import exceptions.*;
 import task.Task;
 import task.tasktypes.Deadline;
 import task.tasktypes.Event;
@@ -12,7 +13,6 @@ import java.util.Scanner;
 
 
 public class TaskManager {
-    private int numberOfTasks;
     private ArrayList<Task> taskList;
 
 
@@ -20,7 +20,6 @@ public class TaskManager {
      * Basic constructor when there is no save state
      */
     public TaskManager() {
-        this.numberOfTasks = 0;
         this.taskList = new ArrayList<>();
     }
 
@@ -30,16 +29,39 @@ public class TaskManager {
      */
     public TaskManager(Scanner sc) {
         this.taskList = Storage.populateArrayList(sc);
-        this.numberOfTasks = this.taskList.size();
     }
 
     /*
+     * Returns a ArrayList<Task> to be printed out
      * @return Returns the entire taskList for printing
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /*
+     * Returns a ArrayList<Task> to be printed out
+     * @param keyword A String to be used to filter tasks
+     * @return Returns a taskList for printing based on detected keyword
+     */
+    public ArrayList<Task> getTaskList(String keyword) {
+        if (keyword.equals(EMPTY_STRING)) {
+            throw new InvalidInputException("Empty keyword");
+        }
+        ArrayList<Task> taskListWithKeyWord = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.toString().contains(keyword)) {
+                taskListWithKeyWord.add(task);
+            }
+        }
+        return taskListWithKeyWord;
+    }
+
+    /*
+     * Returns a ArrayList<Task> to be printed out
+     * @param dueDateString A String to be used to obtain a LocalDate object
+     * @return Returns a taskList for printing based on due date of the tasks
+     */
     public ArrayList<Task> getTaskListDueDate(String dueDateString) {
         LocalDate dueDate = returnValidDate(dueDateString);
         ArrayList<Task> taskListDueDate = new ArrayList<>();
@@ -51,6 +73,10 @@ public class TaskManager {
         return taskListDueDate;
     }
 
+    /*
+     * Returns a ArrayList<Task> to be printed out
+     * @return Returns a taskList for printing based on whether the task is overdue
+     */
     public ArrayList<Task> getTaskListOverdue() {
         LocalDate dueDate = LocalDate.now();
         ArrayList<Task> taskListOverdue = new ArrayList<>();
@@ -65,17 +91,6 @@ public class TaskManager {
         return taskListOverdue;
     }
 
-    public ArrayList<Task> getTaskList(String keyword) {
-        ArrayList<Task> taskListWithKeyWord = new ArrayList<>();
-        for (Task task : this.taskList) {
-            if (task.toString().contains(keyword)) {
-                taskListWithKeyWord.add(task);
-            }
-        }
-        return taskListWithKeyWord;
-    }
-
-    // Add algorithm
     /*
      * Add algorithm
      * newTask is either a ToDo, Deadline, Event
@@ -83,16 +98,15 @@ public class TaskManager {
      * @param taskType Defines what type of Task is to be defined
      * @param input Defines the descriptions of each Task object
      * @param ui UI for printing add task message
+     * @throws InvalidFlagException if tags such as /by is not present
      */
     public void addTask(String taskType, String input, UI ui) {
         try {
             Task newTask = returnCorrectTask(taskType, input);
             taskList.add(newTask);
             ui.printAddTaskMessage(newTask);
-            numberOfTasks += 1;
-        } catch (NoSuchElementException | NumberFormatException e) {
-            //} catch (InvalidFlagException e) {
-            printErrorMessage(TAG_ERROR);
+        } catch (NoSuchElementException e) {
+            throw new InvalidFlagException(TAG_ERROR);
         }
     }
 
@@ -129,6 +143,14 @@ public class TaskManager {
         return new ToDo(task.strip());
     }
 
+    /*
+     * Returns a LocalDate object based on the input string
+     * Exception catch checks for valid string input from the user (input must be 'YYYY-MM-DD')
+     * @param taskType Defines what type of Task is to be defined
+     * @param input Defines the descriptions of each Task object
+     * @param ui, UI for printing add task message
+     * @throws InvalidInputException if LocalDate object could not be instantiated
+     */
     private static LocalDate returnValidDate(String input) {
         try {
             String time[] = input.split("-");
@@ -137,7 +159,7 @@ public class TaskManager {
             int day = Integer.parseInt(time[2].strip());
             return LocalDate.of(year, month, day);
         } catch (Exception e) {
-            throw new NumberFormatException(e.toString());
+            throw new InvalidDateException(INVALID_DATE);
         }
     }
 
@@ -200,53 +222,55 @@ public class TaskManager {
 
     /*
      * Delete algorithm
+     * NumberFormatException and IndexOutOfBoundsException catches for valid index
      * @param input A String that contains the index of the Task to be deleted
      * @param ui A UI instance to print the delete Task message
-     * NumberFormatException and IndexOutOfBoundsException catches for valid index
+     * @throws InvalidIndexException if user inputs an invalid index for deleting
      */
     public void deleteTask(String input, UI ui) {
         try {
             int index = Integer.parseInt(input) - 1;
             ui.printDeleteTaskMessage(this.getTaskList(), index);
             taskList.remove(index);
-            numberOfTasks -= 1;
-        } catch (NumberFormatException e) {
-            printErrorMessage(INVALID_INDEX);
-        } catch (IndexOutOfBoundsException e) {
-            printErrorMessage(OUT_OF_BOUND_INDEX);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(INVALID_INDEX);
         }
     }
 
     /*
      * Mark a task as done
+     * NullPointerException and IndexOutOfBoundsException catches for valid index (or empty list)
      * @param indexString A String that contains the index of the task to be marked as done
      * @param ui A UI instance to print the task completed message
+     * @throws InvalidIndexException if user inputs an invalid index for deleting
      */
     public void mark(String indexString, UI ui) {
         if (!indexString.isBlank()) {
-            try { // in case user inputs invalid index
+            try {
                 int index = Integer.parseInt(indexString) - 1;
                 taskList.get(index).setComplete();
                 ui.printMarkedMessage(this.getTaskList(), index);
-            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-                printErrorMessage(e.toString());
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                throw new InvalidIndexException(INVALID_INDEX);
             }
         }
     }
 
     /*
      * Mark a task as not done
+     * NullPointerException and IndexOutOfBoundsException catches for valid index (or empty list)
      * @param indexString A String that contains the index of the task to be marked as not done
      * @param ui A UI instance to print the task incomplete message
+     * @throws InvalidIndexException if user inputs an invalid index for deleting
      */
     public void unmark(String indexString, UI ui) {
         if (!indexString.isBlank()) {
-            try { // in case user inputs invalid index
+            try {
                 int index = Integer.parseInt(indexString) - 1;
                 taskList.get(index).setIncomplete();
                 ui.printUnmarkedMessage(this.getTaskList(), index);
-            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-                printErrorMessage(e.toString());
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                throw new InvalidIndexException(INVALID_INDEX);
             }
         }
     }

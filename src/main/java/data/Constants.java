@@ -20,7 +20,6 @@ public final class Constants {
     public static final String STRING_SEPARATOR = " | ";
 
     // File path and saving
-    //"src/main/java/data/lastKnownState.txt"
     public static final String SAVE_FILE = "lastKnownState.txt";
     public static final int TASK_TYPE_INDEX = 0;
     public static final int COMPLETION_INDEX = 2;
@@ -75,7 +74,8 @@ public final class Constants {
         TAB + TAB + "- '/by' for deadline" + ENTER +
         TAB + TAB + "- '/from' and '/to' for event" + ENTER +
         TAB + TAB + "- Dates must be in the format of 'YYYY-MM-DD' (Time values not accepted)";
-    public static final String OUT_OF_BOUND_INDEX = String.format("Integer out of bounds");
+    public static final String INVALID_DATE = "Invalid date format (Must be: 'YYYY-MM-DD')";
+    public static final String INVALID_SEARCH_INPUT = "Invalid search input (Check if you have input a valid string)";
     public static void printErrorMessage(String errorType) {
         System.out.println(String.format(ERROR_MESSAGE, errorType));
     }

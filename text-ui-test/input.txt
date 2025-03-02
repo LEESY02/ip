@@ -1,12 +1,21 @@
-todo <Seung-Yoon>: Answer CS2113 tutorial questions
+todo Answer CS2113 tutorial questions
 deadline weekly CS2113 quiz /by Monday 9pm
+deadline weekly CS2113 quiz /by 2025-03-01
 list
-event CS2113 lecture Friday /from Friday 4 /to 6pm
+event CS2113 lecture Friday /from 2025-02-01 /to 2025-03-02
 mark 1
 list
 mark 2
 unmark 1
 list
+search
+search quiz
+due 2025-03
+due 2025-03-01-2359
+due 2025-03-01
+overdue
+list
 delete 5
 delete 1
 list
+bye

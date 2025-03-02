@@ -7,7 +7,7 @@ import static data.Constants.*;
 /*
  * The main Task class that is the parent class of other subtask categories
  * Contains:
- * 1. task: A String to contain the task name
+ * 1. task: A String to contain the task name / description
  * 2. completionStatus: A Boolean to check completion
  * 3. taskType: A String used as a symbol to identify the task types when printing (toString())
  */
@@ -31,27 +31,58 @@ public class Task {
     public void setComplete() {
         completionStatus = true;
     }
+
+    /*
+     * Pair of setters for setting the completionStatus Boolean
+     */
     public void setIncomplete() {
         completionStatus = false;
     }
 
     /*
      * Getters for getting the class elements
+     * @returns completionStatus of the Task
      */
     public boolean getCompletionStatus() { return completionStatus; }
+
+    /*
+     * Getters for getting the class elements
+     * @returns The task description
+     */
     public String getTask() {
         return task;
     }
+
+    /*
+     * Getters for getting the class elements
+     * @returns The task type (i.e. deadline, event etc.)
+     */
     public String getTaskType() {
         return taskType;
     }
 
     /*
      * Getters to be overwritten by subclasses
+     * @returns "", replaced by the Deadline subclass
      */
     public String getDeadline() { return EMPTY_STRING; }
+
+    /*
+     * Getters to be overwritten by subclasses
+     * @returns "", replaced by the Event subclass
+     */
     public String getStartDate() { return EMPTY_STRING; }
+
+    /*
+     * Getters to be overwritten by subclasses
+     * @returns "", replaced by the Event subclass
+     */
     public String getEndDate() { return EMPTY_STRING; }
+
+    /*
+     * Getters to be overwritten by subclasses
+     * @returns A arbitrary LocalDate object, replaced by the Event subclass
+     */
     public LocalDate dueDate() { return LocalDate.of(1,1,1); }
 
     /*

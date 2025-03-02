@@ -4,7 +4,6 @@ import task.Task;
 import static data.Constants.*;
 
 public class ToDo extends Task {
-
     /*
      * Instantiates parent Task class
      * @param task Parameters for parent Task constructor

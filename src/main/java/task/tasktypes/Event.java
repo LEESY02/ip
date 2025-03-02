@@ -6,6 +6,9 @@ import java.time.LocalDate;
 
 import static data.Constants.*;
 
+/*
+ * Contains 2 LocalDate objects (startDate, endDate) to indicate the start and end of Event
+ */
 public class Event extends Task {
     private final LocalDate startDate;
     private final LocalDate endDate;

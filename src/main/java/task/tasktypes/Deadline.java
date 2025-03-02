@@ -4,6 +4,9 @@ import task.Task;
 import static data.Constants.*;
 import java.time.LocalDate;
 
+/*
+ * Contains a LocalDate object (deadline) to indicate the due date of Deadline
+ */
 public class Deadline extends Task {
     private final LocalDate deadline;
 

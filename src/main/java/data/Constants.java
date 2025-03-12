@@ -1,8 +1,8 @@
 package data;
 
-/*
- * A Class of static constants used by other classes
- */
+/**
+  * A Class of static constants used by other classes
+  */
 public final class Constants {
     private Constants() {
         // No need to instantiate the class, we can hide its constructor

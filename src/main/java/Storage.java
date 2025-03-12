@@ -8,15 +8,15 @@ import java.util.Scanner;
 import static data.Constants.*;
 import task.Task;
 
-/*
- * Reads save state and stores them in a Scanner object
- */
+/**
+  * Reads save state and stores them in a Scanner object
+  */
 public class Storage {
     private Scanner sc;
 
-    /*
-     * A public constructor that reads the txt file defined under 'SAVE_FILE' and creates a scanner object for reading
-     */
+    /**
+      * A public constructor that reads the txt file defined under 'SAVE_FILE' and creates a scanner object for reading
+      */
     public Storage() {
         File f = new File(SAVE_FILE);
 
@@ -32,11 +32,11 @@ public class Storage {
         }
     }
 
-    /*
-     * A static method that returns an ArrayList of Task objects based on the save state defined in the Scanner object
-     * @param sc Scanner object with the save state
-     * @return an ArrayList<Task> object of tasks
-     */
+    /**
+      * A static method that returns an ArrayList of Task objects based on the save state defined in the Scanner object
+      * @param sc Scanner object with the save state
+      * @return an ArrayList<Task> object of tasks
+      */
     public static ArrayList<Task> populateArrayList(Scanner sc) {
         ArrayList<Task> newTaskList = new ArrayList<>();
         String line;
@@ -51,11 +51,11 @@ public class Storage {
         return newTaskList;
     }
 
-    /*
-     * A static method that saves the state of a TaskManager based on the ArrayList given at file location 'SAVE_FILE'
-     * @param an ArrayList<Task> object of tasks meant for saving
-     * IOException catch for FileWriter errors
-     */
+    /**
+      * A static method that saves the state of a TaskManager based on the ArrayList given at file location 'SAVE_FILE'
+      * @param taskList ArrayList<Task> object of tasks meant for saving
+      * IOException catch for FileWriter errors
+      */
     public static void saveState(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(SAVE_FILE);
@@ -81,9 +81,9 @@ public class Storage {
         }
     }
 
-    /*
-     * @return Scanner object in this class, used for instantiating a new TaskManager object
-     */
+    /**
+      * @return Scanner object in this class, used for instantiating a new TaskManager object
+      */
     public Scanner returnScanner() {
         return sc;
     }

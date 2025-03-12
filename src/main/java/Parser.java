@@ -4,11 +4,11 @@ import static data.Constants.*;
 
 public class Parser {
 
-    /*
-     * Parses commands based on the 1st word of the input
-     * @param input The string input taken by the UI class
-     * @return a new Command instance
-     */
+    /**
+      * Parses commands based on the 1st word of the input
+      * @param input The string input taken by the UI class
+      * @return a new Command instance
+      */
     public static Command parseCommand(String input) {
         Scanner sc = new Scanner(input);
         String command = sc.next();
